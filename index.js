@@ -38,7 +38,7 @@ const elements = {
     dropDownIcon: document.getElementById("dropDownIcon"),
 
 // Buttons (editing board)
-    deleBoardBtn: document.getElementsById("deleteBoardBtn"),
+    deleBoardBtn: document.getElementById("deleteBoardBtn"),
     editBoardDiv: document.getElementById("editBoardDiv"),
 
 // Main layout
@@ -50,7 +50,7 @@ const elements = {
     titleInput: document.getElementById("title-input"),
     descInput: document.getElementById("desc-input"),
     selectStatus: document.getElementById("select-status"),
-    createTaskBtn: document.getElementById("create-task-btn"),
+    createNewTaskBtn: document.getElementById("create-task-btn"),
     cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
 
 // Modal (edit task)
@@ -184,7 +184,7 @@ function addTaskToUI(task) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModal));
+  cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModalWindow));
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
@@ -213,13 +213,13 @@ function setupEventListeners() {
   });
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
+  elements.editTaskModalWindow.addEventListener('submit',  (event) => {
     addTask(event)
   });
 }
 
 // Toggles tasks modal
-function toggleModal(show, modal = elements.modalWindow) {
+function toggleModal(show, modal = elements.newTaskModalWindow) {
   modal.style.display = show ? 'block' : 'none';
 }
 
@@ -246,7 +246,20 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+  if(show) {
+    elements.sideBarDiv.classList.remove('hidden')
+    elements.sideLogoDiv.classList.remove('hidden')
+    elements.boardsNavListDiv.classList.remove('hidden')
+    elements.hideSideBarBtn.style.display = 'block'
+    elements.showSideBarBtn.style.display = 'none'
+
+  } else {
+    elements.sideBarDiv.classList.add('hidden')
+    elements.sideLogoDiv.classList.add('hidden')
+    elements.boardsNavListDiv.classList.add('hidden')
+    elements.hideSideBarBtn.style.display = 'none'
+    elements.showSideBarBtn.style.display = 'block'
+  }
 }
 
 function toggleTheme() {
@@ -268,7 +281,7 @@ function openEditTaskModal(task) {
   // Delete task using a helper function and close the task modal
 
 
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+  toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
