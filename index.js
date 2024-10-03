@@ -155,7 +155,7 @@ function styleActiveBoard(boardName) {
 
 
 function addTaskToUI(task) {
-  const column = document.querySelector('.column-div[data-status="${task.status}"]'); 
+  const column = document.querySelector(`.column-div[data-status="${task.status}"]`); 
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
     return;
@@ -195,27 +195,26 @@ function setupEventListeners() {
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
   });
 
+ 
   // Clicking outside the modal to close it
   elements.filterDiv.addEventListener('click', () => {
+  if(event.target === elements.filterDiv) {
     toggleModal(false);
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-  });
-
-  // Show sidebar event listener
-  // elements.hideSideBarBtn.addEventListener("click", () => toggleSidebar(false));
- //elements.showSideBarBtn.addEventListener("click", () => toggleSidebar(true));
+  }
+})
 
   // Theme switch event listener
   elements.themeSwitch.addEventListener('change', toggleTheme);
 
   // Show Add New Task Modal event listener
-  elements.createNewTaskBtn.addEventListener('click', () => {
+  elements.addNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
   });
 
   // Add new task form submission event listener
-  elements.editTaskModalWindow.addEventListener('submit',  (event) => {
+  elements.newTaskModalWindow.addEventListener('submit',  (event) => {
     addTask(event)
   });
 
@@ -242,10 +241,6 @@ function toggleModal(show, modal = elements.newTaskModalWindow) {
   modal.style.display = show ? 'block' : 'none';
 }
 
-/*************************************************************************************************************************************************
- * COMPLETE FUNCTION CODE
- * **********************************************************************************************************************************************/
-
 function addTask(event) {
   event.preventDefault(); 
 
@@ -267,7 +262,6 @@ function addTask(event) {
     }
 }
 
-
 function toggleSidebar(show) {
   if(show) {
     elements.sideBarDiv.classList.remove('hidden')
@@ -285,8 +279,6 @@ function toggleSidebar(show) {
   }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////NOT WORKING////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function toggleTheme() {
   const lightTheme = document.body.classList.toggle("light-theme")
 
@@ -319,11 +311,6 @@ window.addEventListener("DOMContentLoaded", () => {
   applyTheme(savedTheme)
 })
 
-elements.themeSwitch.addEventListener("click", toggleTheme)
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 function openEditTaskModal(task) {
   // Set task details in modal inputs
   elements.editTaskTitleInput.value = task.title
@@ -335,7 +322,7 @@ function openEditTaskModal(task) {
   const deleteBtn = elements.deleteTaskBtn
 
   // Call saveTaskChanges upon click of Save Changes button
-  saveChangesBtn.onclick = () => saveTaskChanges(task.id)
+  saveChangesBtn.addEventListener("click", () => saveTaskChanges(task.id))
 
   // Delete task using a helper function and close the task modal
   deleteBtn.onclick = () => {
@@ -348,10 +335,11 @@ function openEditTaskModal(task) {
 }
 
 function saveTaskChanges(taskId) {
+  event.preventDefault()
   // Get new user inputs
   const updatedTitle = elements.editTaskTitleInput.value
   const updatedDescription = elements.editTaskDescInput.value
-  const updatedStatus = elements.editSelectStatus
+  const updatedStatus = elements.editSelectStatus.value
 
   // Create an object with the updated task details
   const updatedTask = {
