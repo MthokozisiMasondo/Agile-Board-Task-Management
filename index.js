@@ -282,14 +282,15 @@ function toggleSidebar(show) {
 function toggleTheme() {
   const lightTheme = document.body.classList.toggle("light-theme")
 
+elements.iconDark.style.display = 'inline'
+elements.iconLight.style.display = 'inline'
+
   if(lightTheme){
     localStorage.setItem('theme', 'light')
-    elements.iconDark.style.display = 'none'
-    elements.iconLight.style.display = 'inline'
+    document.getElementById("logo").src = "./assets/logo-light.svg"
   } else {
     localStorage.setItem('theme', 'dark')
-    elements.iconDark.style.display = 'inline'
-    elements.iconLight.style.display = 'none'
+    document.getElementById("logo").src = "./assets/logo-dark.svg"
   }
  
 }
@@ -297,12 +298,8 @@ function toggleTheme() {
 function applyTheme(theme) {
   if(theme === 'light') {
     document.body.classList.add('light-theme')
-    elements.iconDark.style.display = 'none'
-    elements.iconLight.style.display = 'inline'
   } else {
     document.body.classList.remove('light-theme')
-    elements.iconDark.style.display = 'inline'
-    elements.iconLight.style.display = 'none'
   }
 }
 
