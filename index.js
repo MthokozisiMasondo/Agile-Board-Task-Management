@@ -105,7 +105,6 @@ function displayBoards(boards) {
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
   const filteredTasks = tasks.filter(task => task.board === boardName);
-console.log(tasks)
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
   elements.columnDivs.forEach(column => {
@@ -323,9 +322,12 @@ function openEditTaskModal(task) {
 
   // Delete task using a helper function and close the task modal
   deleteBtn.onclick = () => {
+    const confirmation = confirm("Are you sure you want to delete this task?")
+  if(confirmation) {
     deleteTask(task.id)
     toggleModal(false, elements.editTaskModalWindow)
     refreshTasksUI()
+  }
   }
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
