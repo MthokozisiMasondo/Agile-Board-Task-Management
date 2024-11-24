@@ -1,9 +1,12 @@
-### [JSL11] Agile Board - Kanban Task Management App
+# Agile Board - Kanban Task Management App
 
-##  Powerpoint Presentation 
-- https://1drv.ms/p/c/f708760d836c1331/EYX55DKpB4ZJtkANdvoHvMgBAL0zEOqZnQwxNcwzONZ1dA?e=h7as0y
+##  My Contributions
+###  In this project, I focused on improving the functionality and user experience of the Agile task board. Here’s a breakdown of my contributions:
 
+- Debugged Existing Code: Identified and resolved issues in the code to improve stability and performance.
+- Sidebar Toggle: Added a toggle feature to the sidebar, allowing for a more dynamic and space-efficient interface.
+- Task Management: Implemented features for adding new tasks and saving them persistently.
+- Displaying Saved Tasks: Ensured that tasks are dynamically rendered on the page after they are saved, creating a smooth and interactive experience.
 
-##  Loom Video Presentation 
-- https://www.loom.com/share/b263c77b4cb248cbbecdc5af3c590e5f?sid=4e11d480-8c20-418a-b4bb-3fe28b893812
+These changes enhanced the board's usability and functionality, providing a better tool for managing tasks in an Agile environment.
 
